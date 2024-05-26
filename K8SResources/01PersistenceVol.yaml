@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: azdiskstorage
+  azureDisk:
+    diskName: vartestdisk
+    diskURI: /subscriptions/85a258f4-b0e6-4b97-8628-dbf9f5b39c06/resourceGroups/vartestrg/providers/Microsoft.Compute/disks/vartestdisk
+    kind: Managed
