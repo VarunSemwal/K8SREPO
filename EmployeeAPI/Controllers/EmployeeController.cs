@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using System.Diagnostics;
 
 namespace EmployeeAPI.Controllers
 {
@@ -57,6 +58,27 @@ namespace EmployeeAPI.Controllers
             return connectionString;
         }
 
+        [HttpGet]
+        [Route("updatedsamplepage")]
+        public string UpdatedSamplePage()
+        {
+            return "This is a sample page from app";
+        }
+
+        [HttpGet("fibonacci/{n}")]
+        public IActionResult GetFibonacci(int n)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            var result = CalculateFibonacci(n);
+            stopwatch.Stop();
+            return Ok(new { Number = n, Fibonacci = result, TimeElapsed = stopwatch.ElapsedMilliseconds });
+        }
+
+        private long CalculateFibonacci(int n)
+        {
+            if (n <= 1) return n;
+            return CalculateFibonacci(n - 1) + CalculateFibonacci(n - 2);
+        }
 
     }
 }
