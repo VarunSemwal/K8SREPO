@@ -26,7 +26,7 @@ spec:
             requests:
               cpu: "100m"
             limits:
-              cpu: "500m"
+              cpu: "100m"
           envFrom:
             - configMapRef:
                 name: mongo-config
@@ -36,3 +36,13 @@ spec:
                   configMapKeyRef:
                     name: mongo-config
                     key: ConnectionString
+            - name: username
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: username
+            - name: password
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: password
